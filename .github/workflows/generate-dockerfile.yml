@@ -37,6 +37,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add */Dockerfile
-          git commit -m "🧪 Auto-generate Dockerfiles using Gemini" || echo "No changes to commit"
-          git push
+
+          # Add any Dockerfile that exists
+          find . -name Dockerfile -exec git add {} +
+
+          # Only commit if something is actually staged
+          if git diff --cached --quiet; then
+            echo "🟡 No Dockerfiles changed. Skipping commit."
+          else
+            git commit -m "🧪 Auto-generate Dockerfiles using Gemini"
+            git push
+          fi
