@@ -7,7 +7,7 @@ on:
     paths:
       - "backend/**"
       - "frontend/**"
-      - "generate_dockerfile.py"
+      - "generate_dockerfiles.py"
       - ".env"
 
 jobs:
@@ -31,7 +31,7 @@ jobs:
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
 
       - name: Generate Dockerfiles
-        run: python generate_dockerfile.py
+        run: python generate_dockerfiles.py
 
       - name: Commit Dockerfiles
         run: |
