@@ -1,0 +1,42 @@
+name: Generate Dockerfiles
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/**"
+      - "frontend/**"
+      - "generate_dockerfiles.py"
+      - ".env"
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install python-dotenv requests
+
+      - name: Create .env
+        run: |
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" > .env
+
+      - name: Generate Dockerfiles
+        run: python generate_dockerfiles.py
+
+      - name: Commit Dockerfiles
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add */Dockerfile
+          git commit -m "🧪 Auto-generate Dockerfiles using Gemini" || echo "No changes to commit"
+          git push

@@ -1,0 +1,59 @@
+# 🔐 Environment
+.env
+.env.*.local
+
+# 🐍 Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.log
+.Python
+pip-log.txt
+*.sqlite3
+
+# Poetry
+poetry.lock
+
+# Virtual Environments
+.venv/
+venv/
+
+# 🧪 Testing
+.pytest_cache/
+.coverage
+.tox/
+.nox/
+htmlcov/
+
+# 📦 Packaging
+build/
+dist/
+*.egg-info/
+
+# ⚙️ Node.js / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+pnpm-lock.yaml
+
+# 🔧 IDEs and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# 🚫 Misc
+*.swp
+*.bak
+*.tmp
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Optional: Ignore generated Dockerfiles if they're committed automatically
+**/Dockerfile
